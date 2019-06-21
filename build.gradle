@@ -14,7 +14,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 bootJar {
-    baseName = 'route-optimizer'
+    baseName = 'autocomplete'
     version =  '0.1.0'
 }
 
@@ -27,6 +27,8 @@ targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'com.github.kstyrc', name: 'embedded-redis', version: '0.6'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
