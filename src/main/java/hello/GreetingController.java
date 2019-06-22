@@ -1,5 +1,6 @@
 package hello;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +18,20 @@ public class GreetingController {
     Jedis jedis = new Jedis("localhost", Application.port);
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(required=false, defaultValue="World") String name) {
-        System.out.println("==== in greeting ====");
-        jedis.set("name-" + name, name);
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+    @GetMapping("/autocomplete")
+    public Greeting getAutocomplete(@RequestParam(required=false) String word) {
+        System.out.println("Getting autocomplete");
+        jedis.lpush("test#testmore", word);
+        return new Greeting(1, "test");
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/search")
+    public void search(@RequestParam(required=false) String word) {
+        System.out.println("Set in jedis: " + word);
+        for (int i = 0; i < word.length(); i++) {
+            int d = 5;
+        }
+    }
+
 }
