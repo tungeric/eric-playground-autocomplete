@@ -1,10 +1,8 @@
 package hello;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import redis.clients.jedis.Jedis;
 import redis.embedded.RedisServer;
 
 @SpringBootApplication

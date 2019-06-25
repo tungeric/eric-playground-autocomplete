@@ -19,10 +19,10 @@ public class GreetingController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/autocomplete")
-    public Greeting getAutocomplete(@RequestParam(required=false) String word) {
+    public List<String> getAutocomplete(@RequestParam(required=false) String word) {
         System.out.println("Getting autocomplete");
-        jedis.lpush("test#testmore", word);
-        return new Greeting(1, "test");
+        jedis.lpush("test", word);
+        return jedis.lrange("test", 0, 10000);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
